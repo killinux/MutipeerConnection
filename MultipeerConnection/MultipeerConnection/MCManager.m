@@ -34,7 +34,12 @@
 }
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
-	
+	NSDictionary *dict = @{@"data": data,
+						   @"peerID": peerID
+						   };
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MCDidReceiveDataNotification"
+														object:nil
+													  userInfo:dict];
 }
 
 -(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress {
