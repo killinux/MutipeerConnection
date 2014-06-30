@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ConnectionViewController : UIViewController
+#import "AppDelegate.h"
+
+@interface ConnectionViewController : UIViewController <MCBrowserViewControllerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSMutableArray *arrConnectedDevices;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UISwitch *swVisible;
 @property (weak, nonatomic) IBOutlet UITableView *tableConnectedDevices;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
+
+- (void)peerDidChangeStateWithNotification:(NSNotification *)notification;
 
 - (IBAction)browseForDevices:(id)sender;
 - (IBAction)toggleVisibility:(id)sender;
